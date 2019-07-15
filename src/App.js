@@ -1,11 +1,9 @@
 import React from 'react';
-import { Button } from 'antd';
+import Sidebar from './menu/SideBar';
 
 function App() {
   return (
-    <div>
-      <Button type="primary">add</Button>
-    </div>
+      <Sidebar />
   );
 }
 
