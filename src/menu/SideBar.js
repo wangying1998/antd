@@ -1,14 +1,52 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon,Button } from 'antd';
 import '../static/css/menu/SideBar.css';
+import { getUser } from '../apis/api';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
+// const { SubMenu } = Menu;
 
 
 class SideBar extends Component {
     state = {
-        collapsed: false,
+        collapsed: false,  // sidebar的折叠显示
+        menuList: [
+            {
+                icon: 'home',
+                name: '首页',
+                key: 'home'
+            },
+            {
+                icon: '',
+                name: '表格管理',
+                key: ''
+            },
+            {
+                icon: 'user',
+                name: '用户管理',
+                key: '',
+                children: [
+                    {
+                        name: ''
+                    }
+                ]
+            },
+            {
+                icon: '',
+                name: '权限管理',
+                key: '',
+                children: [
+                    {
+                        name: '角色管理',
+                        key: 'roleManage'
+                    },
+                    {
+                        name: '管理员管理',
+                        key: 'adminManage'
+                    }
+                ]
+            }
+        ]
     };
 
     toggle = () => {
@@ -16,37 +54,29 @@ class SideBar extends Component {
             collapsed: !this.state.collapsed,
         });
     };
+
+    getUser(){
+        getUser();
+    };
+
     render() {
         return (
             <Layout className="container">
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                     <div className="logo" />
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1">
-                            <Icon type="user" />
-                            <span className="nav-text">图表</span>
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['home']}>
+                        <Menu.Item key="home">
+                            <Icon type="home" />
+                            <span className="nav-text">首页</span>
                         </Menu.Item>
                         <Menu.Item key="2">
                             <Icon type="video-camera" />
-                            <span className="nav-text">列表</span>
+                            <span className="nav-text">管理1</span>
                         </Menu.Item>
                         <Menu.Item key="3">
                             <Icon type="upload" />
-                            <span className="nav-text">文本</span>
+                            <span className="nav-text">管理2</span>
                         </Menu.Item>
-                        <SubMenu
-                            key="4"
-                            title={
-                                <span>
-                                <Icon type="user" />
-                                <span>权限管理</span>
-                                </span>
-                            }
-                            >
-                            <Menu.Item key="4.1">Tom</Menu.Item>
-                            <Menu.Item key="4.2">Bill</Menu.Item>
-                            <Menu.Item key="4.3">Alex</Menu.Item>
-                        </SubMenu>
                     </Menu>
                 </Sider>
                 <Layout>
@@ -59,11 +89,11 @@ class SideBar extends Component {
                     </Header>
                     <Content style={{ margin: '24px 16px 0' }}>
                         <div style={{ padding: 24, background: '#fff' }}>content</div>
+                        <Button onClick={this.getUser}>获取数据</Button>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>
-            // mountNode,
         );
     }
 }
