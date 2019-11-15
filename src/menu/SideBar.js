@@ -88,8 +88,9 @@ class SideBar extends Component {
                         />
                     </Header>
                     <Content style={{ margin: '24px 16px 0' }}>
-                        <div style={{ padding: 24, background: '#fff' }}>content</div>
-                        <Button onClick={this.getUser}>获取数据</Button>
+                        <div style={{ padding: 24, background: '#fff',height: '100%' }}>
+                            <Button>获取数据</Button>
+                        </div>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
